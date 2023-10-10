@@ -9,83 +9,42 @@ namespace LeaveManagement_API.Data
         {
 
         }
-
-        public DbSet<Employee> Employees{ get; set; }
-        public DbSet<LeaveRequest> LeaveRequests{get;set;}
-        public DbSet<LeaveType> LeaveTypes{get;set;}
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<LeaveType> LeaveTypes { get; set; }
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Konfigurera relationer och annan konfiguration här om det behövs.
+            // Configure relationships and entity configurations here, if needed.
         }
 
-        public void SeedData(AppDbContext context)
+        public void SeedData(AppDbContext appDbcontext)
         {
-            if (!context.Employees.Any())
+            if (!appDbcontext.Employees.Any())
             {
-                // Lägg till fem Employee-objekt med Guid som EmployeeId
+                // Add employees here
                 var employees = new List<Employee>
         {
             new Employee
             {
-                Id = Guid.NewGuid(), // Generera ett unikt ID
-                FullName = "Anställd 1",
-                Email = "anstalld1@example.com",
-                Password = "password1", 
-                Gender = "Man",
+                Id = Guid.NewGuid(),
+                FullName = "John Doe",
+                Email = "john.doe@example.com",
+                PasswordHash = "hashed_password", // You should hash passwords in a real application
+                Gender = "Male",
                 PhoneNumber = "123456789",
                 Role = "Employee"
             },
-            new Employee
-            {
-                Id = Guid.NewGuid(),
-                FullName = "Anställd 2",
-                Email = "anstalld2@example.com",
-                Password = "password2",
-                Gender = "Kvinna",
-                PhoneNumber = "987654321",
-                Role = "Employee"
-            },
-            new Employee
-            {
-                Id = Guid.NewGuid(),
-                FullName = "Anställd 3",
-                Email = "anstalld3@example.com",
-                Password = "password3",
-                Gender = "Man",
-                PhoneNumber = "555555555",
-                Role = "Employee"
-            },
-            new Employee
-            {
-                Id = Guid.NewGuid(),
-                FullName = "Anställd 4",
-                Email = "anstalld4@example.com",
-                Password = "password4",
-                Gender = "Kvinna",
-                PhoneNumber = "444444444",
-                Role = "Employee"
-            },
-            new Employee
-            {
-                Id = Guid.NewGuid(),
-                FullName = "Anställd 5",
-                Email = "anstalld5@example.com",
-                Password = "password5",
-                Gender = "Man",
-                PhoneNumber = "222222222",
-                Role = "Employee"
-            },
+            // Add more employees as needed
         };
-
-                context.Employees.AddRange(employees);
-                context.SaveChanges();
+                Employees.AddRange(employees);
+                appDbcontext.SaveChanges();
             }
 
-            if (!context.LeaveTypes.Any())
+            if (!appDbcontext.LeaveTypes.Any())
             {
-                // Lägg till några LeaveType-objekt
+                // Add leave types here
                 var leaveTypes = new List<LeaveType>
         {
             new LeaveType
@@ -103,81 +62,46 @@ namespace LeaveManagement_API.Data
                 TypeName = "Sjuk",
                 MaxDays = 5
             },
+            // Add more leave types as needed
         };
-
-                context.LeaveTypes.AddRange(leaveTypes);
-                context.SaveChanges();
+                LeaveTypes.AddRange(leaveTypes);
+                appDbcontext.SaveChanges();
             }
 
-            if (!context.LeaveRequests.Any())
+            if (!appDbcontext.LeaveRequests.Any())
             {
-                // Hämta Employee-objekten för att använda deras Guids som EmployeeId i LeaveRequest
-                var employees = context.Employees.ToList();
-
-                // Lägg till fem olika LeaveRequest-objekt med olika EmployeeId och LeaveTypeId som Guid
+                // Add leave requests here
                 var leaveRequests = new List<LeaveRequest>
         {
             new LeaveRequest
             {
-                EmployeeId = employees[0].Id,
-                LeaveTypeId = 1, // LeaveType: Semester
+                EmployeeId = Employees.First().Id, // Assign the ID of an existing employee
+                LeaveTypeId = LeaveTypes.First().Id, // Assign the ID of an existing leave type
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(5),
-                Status = LeaveRequest.LeaveStatus.Pending
+                Status = LeaveRequest.LeaveStatus.Pending,
+                Comments = "Sample leave request"
             },
-            new LeaveRequest
-            {
-                EmployeeId = employees[1].Id,
-                LeaveTypeId = 2, // LeaveType: VAB
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(3),
-                Status = LeaveRequest.LeaveStatus.Pending
-            },
-            new LeaveRequest
-            {
-                EmployeeId = employees[2].Id,
-                LeaveTypeId = 3, // LeaveType: Sjuk
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(7),
-                Status = LeaveRequest.LeaveStatus.Pending
-            },
-            new LeaveRequest
-            {
-                EmployeeId = employees[3].Id,
-                LeaveTypeId = 1, // LeaveType: Semester
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(2),
-                Status = LeaveRequest.LeaveStatus.Pending
-            },
-            new LeaveRequest
-            {
-                EmployeeId = employees[4].Id,
-                LeaveTypeId = 2, // LeaveType: VAB
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(4),
-                Status = LeaveRequest.LeaveStatus.Pending
-            },
+            // Add more leave requests as needed
         };
-
-                context.LeaveRequests.AddRange(leaveRequests);
-                context.SaveChanges();
+                LeaveRequests.AddRange(leaveRequests);
+                appDbcontext.SaveChanges();
             }
 
-            if (!context.Admins.Any())
+            if (!appDbcontext.Admins.Any())
             {
-                // Lägg till en admin
+                // Add admin here
                 var admin = new Admin
                 {
-                    Id = Guid.NewGuid(), // Generera ett unikt ID
                     Username = "admin",
-                    Password = "hashedadminpassword", // Använd hashat lösenord
-                    IsAdmin = true
+                    PasswordHash = "admin_password_hash", // Hashed admin password
                 };
-
-                context.Admins.Add(admin);
-                context.SaveChanges();
+                Admins.Add(admin);
+                appDbcontext.SaveChanges();
             }
         }
+
+
 
     }
 }
