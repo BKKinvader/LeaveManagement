@@ -54,6 +54,16 @@ namespace LeaveManagement_API.Services
             return employee;
         }
 
+        public Task<Employee> GetEmployeeByName(string title)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task SaveAsync()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<Employee> UpdateEmployee(Employee employee)
         {
             _dbContext.Employees.Update(employee);
