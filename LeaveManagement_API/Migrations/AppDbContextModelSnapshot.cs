@@ -28,10 +28,7 @@ namespace LeaveManagement_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
@@ -60,7 +57,7 @@ namespace LeaveManagement_API.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -81,6 +78,9 @@ namespace LeaveManagement_API.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
@@ -135,7 +135,7 @@ namespace LeaveManagement_API.Migrations
             modelBuilder.Entity("LeaveManagement_API.Model.LeaveRequest", b =>
                 {
                     b.HasOne("LeaveManagement_API.Model.Employee", "Employee")
-                        .WithMany("LeaveTables")
+                        .WithMany("LeaveRequests")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -158,7 +158,7 @@ namespace LeaveManagement_API.Migrations
 
             modelBuilder.Entity("LeaveManagement_API.Model.Employee", b =>
                 {
-                    b.Navigation("LeaveTables");
+                    b.Navigation("LeaveRequests");
                 });
 
             modelBuilder.Entity("LeaveManagement_API.Model.LeaveType", b =>
