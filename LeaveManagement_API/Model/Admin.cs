@@ -9,5 +9,6 @@ namespace LeaveManagement_API.Model
         public string Username { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
+        public ICollection<Employee> ManagedEmployees { get; set; }
     }
 }
