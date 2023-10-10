@@ -6,8 +6,11 @@ namespace LeaveManagement_API.Services
     {
         public Task<IEnumerable<Employee>> GetAllEmployees();
         public Task<Employee> GetEmployeeById(Guid id);
+        public Task<Employee> GetEmployeeByName(string title);
         public Task<Employee> AddEmployee(Employee employee);
         public Task<Employee> UpdateEmployee(Employee employee);
         public Task<Employee> DeleteEmployee(Guid id);
+
+       public Task SaveAsync();
     }
 }
