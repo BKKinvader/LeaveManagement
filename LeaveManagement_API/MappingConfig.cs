@@ -9,6 +9,7 @@ namespace LeaveManagement_API
         public MappingConfig()
         {
             CreateMap<Employee, EmployeeDTO>().ReverseMap();
+            CreateMap<LeaveBalance, LeaveBalanceDTO>().ReverseMap();
         }
     }
 }
