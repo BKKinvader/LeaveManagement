@@ -69,12 +69,6 @@ namespace LeaveManagement_API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
- AddLeaveTypeService
-            
-            app.ConfigureBookEndPoints();
-
-
             app.ConfigureEmployeeEndPoints();
             app.ConfigureLeaveRequestEndPoints();
             app.ConfigureLeaveBalanceEndPoints();
