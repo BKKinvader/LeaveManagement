@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentValidation;
 using LeaveManagement_API.Data;
+using LeaveManagement_API.Endpoint;
 using LeaveManagement_API.Endpoints;
 using LeaveManagement_API.Model;
 using LeaveManagement_API.Model.DTOs;
@@ -26,6 +27,8 @@ namespace LeaveManagement_API
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
             builder.Services.AddAutoMapper(typeof(MappingConfig));
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
@@ -61,6 +64,7 @@ namespace LeaveManagement_API
 
             app.UseAuthorization();
 
+            app.ConfigureLeaveTypeEndpoints();
             app.ConfigureBookEndPoints();
 
 
