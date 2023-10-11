@@ -14,6 +14,7 @@ namespace LeaveManagement_API.Data
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<LeaveBalance> LeaveBalances { get; set; }
+        public DbSet<LeaveApplicationNotification> LeaveApplicationNotifications { get; set; }
 
         public DbSet<Admin> Admins { get; set; }
 
@@ -31,7 +32,6 @@ namespace LeaveManagement_API.Data
                 {
                     new Employee
                     {
-                        Id = Guid.NewGuid(),
                         FullName = "John Doe",
                         Email = "john.doe@example.com",
                         PasswordHash = "hashed_password", // You should hash passwords in a real application
@@ -66,7 +66,7 @@ namespace LeaveManagement_API.Data
                         MaxDays = 5
                     },
                     // Add more leave types as needed
-                    };
+                };
                 LeaveTypes.AddRange(leaveTypes);
                 appDbcontext.SaveChanges();
             }
@@ -78,8 +78,8 @@ namespace LeaveManagement_API.Data
                 {
                     new LeaveRequest
                     {
-                        EmployeeId = Employees.First().Id, // Assign the ID of an existing employee
-                        LeaveTypeId = LeaveTypes.First().Id, // Assign the ID of an existing leave type
+                        EmployeeId = 1, // Assign the ID of an existing employee
+                        LeaveTypeId = 1, // Assign the ID of an existing leave type
                         StartDate = DateTime.Now,
                         EndDate = DateTime.Now.AddDays(5),
                         Status = LeaveRequest.LeaveStatus.Pending,
@@ -110,14 +110,39 @@ namespace LeaveManagement_API.Data
                 {
                     new LeaveBalance
                     {
-                        EmployeeId = appDbcontext.Employees.First().Id, // Assign the ID of an existing employee
-                        LeaveTypeId = appDbcontext.LeaveTypes.First().Id, // Assign the ID of an existing leave type
+                        EmployeeId = 1, // Assign the ID of an existing employee
+                        LeaveTypeId = 1, // Assign the ID of an existing leave type
                         RemainingDays = 20, // Specify the remaining days
                     },
                     // Add more LeaveBalance records as needed
                 };
-                appDbcontext.LeaveBalances.AddRange(leaveBalances);
+                LeaveBalances.AddRange(leaveBalances);
                 appDbcontext.SaveChanges();
+            }
+
+            if (!appDbcontext.LeaveApplicationNotifications.Any())
+            {
+                // Add Leave Application Notifications here
+                var leaveApplicationNotifications = new List<LeaveApplicationNotification>
+                {
+                    new LeaveApplicationNotification
+                    {
+                        LeaveRequestId = 1, // Assign the ID of an existing leave request
+                        NotificationMessage = "Your leave request has been approved.",
+                        IsRead = false,
+                        NotificationDate = DateTime.Now
+                    },
+                    new LeaveApplicationNotification
+                    {
+                     LeaveRequestId = 1, // Assign the ID of an existing leave request
+                        NotificationMessage = "Your leave request has been rejected.",
+                        IsRead = false,
+                        NotificationDate = DateTime.Now
+                    },
+                    // Add more Leave Application Notifications as needed
+                };
+                    appDbcontext.LeaveApplicationNotifications.AddRange(leaveApplicationNotifications);
+                    appDbcontext.SaveChanges();
             }
 
         }

@@ -4,9 +4,9 @@ namespace LeaveManagement_API.Model
 {
     public class LeaveRequest
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
-        public Guid EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [Required]
         public int LeaveTypeId { get; set; }
         [Required]

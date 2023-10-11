@@ -20,7 +20,7 @@ namespace LeaveManagement_API.Services
             return leaveRequest;
         }
 
-        public async Task<LeaveRequest> DeleteLeaveRequest(Guid id)
+        public async Task<LeaveRequest> DeleteLeaveRequest(int id)
         {
             var leaveRequest = await _dbContext.LeaveRequests.FindAsync(id);
             _dbContext.LeaveRequests.Remove(leaveRequest);
@@ -38,7 +38,7 @@ namespace LeaveManagement_API.Services
             return await _dbContext.LeaveRequests.ToListAsync();
         }
 
-        public async Task<LeaveRequest> GetLeaveRequestById(Guid id)
+        public async Task<LeaveRequest> GetLeaveRequestById(int id)
         {
             return await _dbContext.LeaveRequests.FindAsync(id);
         }
