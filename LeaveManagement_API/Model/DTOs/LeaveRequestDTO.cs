@@ -6,7 +6,7 @@ namespace LeaveManagement_API.Model.DTOs
     {
 
         [Required]
-        public Guid EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [Required]
         public int LeaveTypeId { get; set; }
         [Required]

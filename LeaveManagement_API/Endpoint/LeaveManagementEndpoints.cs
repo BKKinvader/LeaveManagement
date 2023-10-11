@@ -13,10 +13,10 @@ namespace LeaveManagement_API.Endpoints
         public static void ConfigureEmployeeEndPoints(this WebApplication app)
         {
             app.MapGet("/api/emplooyee/", GetAllEmployees).WithName("GetEmployees").Produces<APIResponse>(200);
-            app.MapGet("/api/employees/{id:Guid}", GetEmployeeById).WithName("GetEmployeeById").Produces<APIResponse>(200);
+            app.MapGet("/api/employees/{id:int}", GetEmployeeById).WithName("GetEmployeeById").Produces<APIResponse>(200);
             app.MapPost("/api/employee", CreateEmployee).WithName("CreateEmployee").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(201).Produces(400);
-            app.MapPut("/api/employees/{id:Guid}", UpdateEmployee).WithName("UpdateEmployee").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(200).Produces(400);
-            app.MapDelete("/api/employees/{id:Guid}", DeleteEmployeeById).WithName("DeleteEmployee").Produces<APIResponse>(200);
+            app.MapPut("/api/employees/{id:int}", UpdateEmployee).WithName("UpdateEmployee").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(200).Produces(400);
+            app.MapDelete("/api/employees/{id:int}", DeleteEmployeeById).WithName("DeleteEmployee").Produces<APIResponse>(200);
         }
 
 
@@ -29,7 +29,7 @@ namespace LeaveManagement_API.Endpoints
             return Results.Ok(response);
         }
 
-        private async static Task<IResult> GetEmployeeById(IEmployeeService _employeeService, Guid id)
+        private async static Task<IResult> GetEmployeeById(IEmployeeService _employeeService, int id)
         {
             APIResponse response = new();
             response.Result = await _employeeService.GetEmployeeById(id);
@@ -53,7 +53,7 @@ namespace LeaveManagement_API.Endpoints
 
         }
 
-        private async static Task<IResult> UpdateEmployee(IEmployeeService _employeeService, IMapper _mapper, EmployeeDTO employeeDTO, Guid id)
+        private async static Task<IResult> UpdateEmployee(IEmployeeService _employeeService, IMapper _mapper, EmployeeDTO employeeDTO, int id)
         {
             APIResponse response = new()
             {
@@ -79,7 +79,7 @@ namespace LeaveManagement_API.Endpoints
             return Results.Ok(response);
         }
 
-        private async static Task<IResult> DeleteEmployeeById(IEmployeeService _employeeService, Guid id)
+        private async static Task<IResult> DeleteEmployeeById(IEmployeeService _employeeService, int id)
         {
             APIResponse response = new()
             {
@@ -118,7 +118,7 @@ namespace LeaveManagement_API.Endpoints
 //}).WithName("GetEmployees").Produces<APIResponse>(200);
 
 
-//app.MapGet("/api/employees/{id:Guid}", async ([FromServices] IEmployeeService _employeeService, Guid id) =>
+//app.MapGet("/api/employees/{id:int}", async ([FromServices] IEmployeeService _employeeService, int id) =>
 //{
 //    var employee = await _employeeService.GetEmployeeById(id);
 //    if (employee == null)
@@ -144,7 +144,7 @@ namespace LeaveManagement_API.Endpoints
 
 //}).WithName("CreateBook").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(201).Produces(400);
 
-//app.MapPut("/api/employees/{id:Guid}", async (IEmployeeService _employeeService, IMapper _mapper, EmployeeDTO employeeDto, Guid id) =>
+//app.MapPut("/api/employees/{id:int}", async (IEmployeeService _employeeService, IMapper _mapper, EmployeeDTO employeeDto, int id) =>
 //{
 //    APIResponse response = new()
 //    {
@@ -171,7 +171,7 @@ namespace LeaveManagement_API.Endpoints
 //    return Results.Ok(response);
 //}).WithName("UpdateEmployee").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(200).Produces(400);
 
-//app.MapDelete("/api/employees/{id:Guid}", async (IEmployeeService _employeeService, Guid id) =>
+//app.MapDelete("/api/employees/{id:int}", async (IEmployeeService _employeeService, int id) =>
 //{
 //    APIResponse response = new()
 //    {

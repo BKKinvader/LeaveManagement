@@ -2,8 +2,8 @@
 {
     public class LeaveApplicationNotification
     {
-        public Guid Id { get; set; }
-        public Guid LeaveRequestId { get; set; }
+        public int Id { get; set; }
+        public int LeaveRequestId { get; set; }
         public string NotificationMessage { get; set; }
         public bool IsRead { get; set; }
         public DateTime NotificationDate { get; set; }

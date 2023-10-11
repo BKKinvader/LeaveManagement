@@ -3,7 +3,7 @@
     public class LeaveBalance
     {
         public int Id { get; set; }
-        public Guid EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         public int LeaveTypeId { get; set; }
         public int RemainingDays { get; set; }
 

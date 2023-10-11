@@ -11,10 +11,10 @@ namespace LeaveManagement_API.Endpoint
         public static void ConfigureLeaveRequestEndPoints(this WebApplication app)
         {
             app.MapGet("/api/LeaveRequest/", GetAllLeaveRequests).WithName("GetLeaveRequest").Produces<APIResponse>(200);
-            app.MapGet("/api/LeaveRequest/{id:Guid}", GetLeaveRequestById).WithName("GetLeaveRequestById").Produces<APIResponse>(200);
+            app.MapGet("/api/LeaveRequest/{id:int}", GetLeaveRequestById).WithName("GetLeaveRequestById").Produces<APIResponse>(200);
             app.MapPost("/api/LeaveRequest", CreateLeaveRequest).WithName("CreateLeaveRequest").Accepts<LeaveRequestDTO>("application/json").Produces<APIResponse>(201).Produces(400);
-            app.MapPut("/api/LeaveRequest/{id:Guid}", UpdateLeaveRequest).WithName("UpdateELeaveRequest").Accepts<LeaveRequestDTO>("application/json").Produces<APIResponse>(200).Produces(400);
-            app.MapDelete("/api/LeaveRequest/{id:Guid}", DeleteLeaveRequestById).WithName("DeleteLeaveRequest").Produces<APIResponse>(200);
+            app.MapPut("/api/LeaveRequest/{id:int}", UpdateLeaveRequest).WithName("UpdateELeaveRequest").Accepts<LeaveRequestDTO>("application/json").Produces<APIResponse>(200).Produces(400);
+            app.MapDelete("/api/LeaveRequest/{id:int}", DeleteLeaveRequestById).WithName("DeleteLeaveRequest").Produces<APIResponse>(200);
         }
 
         private async static Task<IResult> GetAllLeaveRequests(ILeaveRequestService _leaveRequestService)
@@ -27,7 +27,7 @@ namespace LeaveManagement_API.Endpoint
             return Results.Ok(response);
         }
 
-        private async static Task<IResult> GetLeaveRequestById(ILeaveRequestService _leaveRequestService, Guid id)
+        private async static Task<IResult> GetLeaveRequestById(ILeaveRequestService _leaveRequestService, int id)
         {
             APIResponse response = new();
             response.Result = await _leaveRequestService.GetLeaveRequestById(id);
@@ -52,7 +52,7 @@ namespace LeaveManagement_API.Endpoint
 
         }
 
-        private async static Task<IResult> UpdateLeaveRequest(ILeaveRequestService leaveRequestService, IMapper _mapper, LeaveRequest leaveRequest, Guid id)
+        private async static Task<IResult> UpdateLeaveRequest(ILeaveRequestService leaveRequestService, IMapper _mapper, LeaveRequest leaveRequest, int id)
         {
             APIResponse response = new()
             {
@@ -75,7 +75,7 @@ namespace LeaveManagement_API.Endpoint
             return Results.Ok(response);
         }
 
-        private async static Task<IResult> DeleteLeaveRequestById(ILeaveRequestService leaveRequestService, Guid id)
+        private async static Task<IResult> DeleteLeaveRequestById(ILeaveRequestService leaveRequestService, int id)
         {
             APIResponse response = new()
             {

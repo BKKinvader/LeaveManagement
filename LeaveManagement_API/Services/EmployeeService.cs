@@ -21,7 +21,7 @@ namespace LeaveManagement_API.Services
             return employee;
         }
 
-        public async Task<Employee> DeleteEmployee(Guid id)
+        public async Task<Employee> DeleteEmployee(int id)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace LeaveManagement_API.Services
             return await _dbContext.Employees.ToListAsync();
         }
 
-        public async Task<Employee> GetEmployeeById(Guid id)
+        public async Task<Employee> GetEmployeeById(int id)
         {
             var employee = await _dbContext.Employees.FindAsync(id);
             return employee;
