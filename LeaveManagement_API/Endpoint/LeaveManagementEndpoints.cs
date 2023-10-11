@@ -10,13 +10,13 @@ namespace LeaveManagement_API.Endpoints
 {
     public static class LeaveManagementEndpoints
     {
-        public static void ConfigureBookEndPoints(this WebApplication app)
+        public static void ConfigureEmployeeEndPoints(this WebApplication app)
         {
             app.MapGet("/api/emplooyee/", GetAllEmployees).WithName("GetEmployees").Produces<APIResponse>(200);
             app.MapGet("/api/employees/{id:Guid}", GetEmployeeById).WithName("GetEmployeeById").Produces<APIResponse>(200);
-            app.MapPost("/api/employee", CreateEmployee).WithName("CreateBook").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(201).Produces(400);
+            app.MapPost("/api/employee", CreateEmployee).WithName("CreateEmployee").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(201).Produces(400);
             app.MapPut("/api/employees/{id:Guid}", UpdateEmployee).WithName("UpdateEmployee").Accepts<EmployeeDTO>("application/json").Produces<APIResponse>(200).Produces(400);
-            app.MapDelete("/api/employees/{id:Guid}", DeleteEmployeeById).WithName("Delete").Produces<APIResponse>(200);
+            app.MapDelete("/api/employees/{id:Guid}", DeleteEmployeeById).WithName("DeleteEmployee").Produces<APIResponse>(200);
         }
 
 
