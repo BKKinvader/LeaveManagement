@@ -12,8 +12,8 @@ namespace LeaveManagement_API.Endpoint
         {
             app.MapGet("/api/LeaveRequest/", GetAllLeaveRequests).WithName("GetLeaveRequest").Produces<APIResponse>(200);
             app.MapGet("/api/LeaveRequest/{id:Guid}", GetLeaveRequestById).WithName("GetLeaveRequestById").Produces<APIResponse>(200);
-            app.MapPost("/api/LeaveRequest", CreateLeaveRequest).WithName("CreateLeaveRequest").Accepts<LeaveRequest>("application/json").Produces<APIResponse>(201).Produces(400);
-            app.MapPut("/api/LeaveRequest/{id:Guid}", UpdateLeaveRequest).WithName("UpdateELeaveRequest").Accepts<LeaveRequest>("application/json").Produces<APIResponse>(200).Produces(400);
+            app.MapPost("/api/LeaveRequest", CreateLeaveRequest).WithName("CreateLeaveRequest").Accepts<LeaveRequestDTO>("application/json").Produces<APIResponse>(201).Produces(400);
+            app.MapPut("/api/LeaveRequest/{id:Guid}", UpdateLeaveRequest).WithName("UpdateELeaveRequest").Accepts<LeaveRequestDTO>("application/json").Produces<APIResponse>(200).Produces(400);
             app.MapDelete("/api/LeaveRequest/{id:Guid}", DeleteLeaveRequestById).WithName("DeleteLeaveRequest").Produces<APIResponse>(200);
         }
 
@@ -36,7 +36,7 @@ namespace LeaveManagement_API.Endpoint
             return Results.Ok(response);
         }
 
-        private async static Task<IResult> CreateLeaveRequest(ILeaveRequestService _leaveRequestService, LeaveRequest leaveRequest)
+        private async static Task<IResult> CreateLeaveRequest(ILeaveRequestService _leaveRequestService, IMapper _mapper, LeaveRequestDTO leaveRequestDTO)
         {
             APIResponse response = new()
             {
@@ -44,6 +44,7 @@ namespace LeaveManagement_API.Endpoint
                 StatusCode = HttpStatusCode.OK,
             };
 
+            LeaveRequest leaveRequest = _mapper.Map<LeaveRequest>(leaveRequestDTO);
             response.Result = await _leaveRequestService.CreateLeaveRequest(leaveRequest);
             response.IsSuccess = true;
             response.StatusCode = HttpStatusCode.Created;
