@@ -27,6 +27,12 @@ namespace LeaveManagement_API
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
             builder.Services.AddAutoMapper(typeof(MappingConfig));
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+
+            
+
+
+            builder.Services.AddScoped<ILeaveBalanceService, LeaveBalanceService>();
+            builder.Services.AddScoped<ILeaveRequestService, LeaveRequestService>();
             builder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 
 
@@ -64,8 +70,15 @@ namespace LeaveManagement_API
 
             app.UseAuthorization();
 
-            app.ConfigureLeaveTypeEndpoints();
+ AddLeaveTypeService
+            
             app.ConfigureBookEndPoints();
+
+
+            app.ConfigureEmployeeEndPoints();
+            app.ConfigureLeaveRequestEndPoints();
+            app.ConfigureLeaveBalanceEndPoints();
+            app.ConfigureLeaveTypeEndpoints();
 
 
 
