@@ -11,7 +11,7 @@ namespace LeaveManagement_API.Services
 
         public EmployeeService(AppDbContext dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<Employee> AddEmployee(Employee employee)
@@ -30,12 +30,12 @@ namespace LeaveManagement_API.Services
                 await _dbContext.SaveChangesAsync();
                 return employee;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 Console.WriteLine("trash");
                 throw;
             }
-            
+
         }
 
         public async Task<IEnumerable<Employee>> GetAllEmployees()

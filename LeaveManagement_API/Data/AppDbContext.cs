@@ -15,7 +15,6 @@ namespace LeaveManagement_API.Data
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<LeaveBalance> LeaveBalances { get; set; }
         public DbSet<LeaveApplicationNotification> LeaveApplicationNotifications { get; set; }
-
         public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
