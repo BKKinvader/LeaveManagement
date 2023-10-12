@@ -8,7 +8,7 @@ using System.Net;
 
 namespace LeaveManagement_API.Endpoints
 {
-    public static class LeaveManagementEndpoints
+    public static class EmployeeEndpoints
     {
         public static void ConfigureEmployeeEndPoints(this WebApplication app)
         {

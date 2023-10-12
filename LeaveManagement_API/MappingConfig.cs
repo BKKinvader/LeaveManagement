@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LeaveManagement_API.Model;
 using LeaveManagement_API.Model.DTOs;
+using LeaveManagement_API.Services;
 
 namespace LeaveManagement_API
 {
@@ -17,6 +18,9 @@ namespace LeaveManagement_API
 
 
             CreateMap<LeaveRequest, LeaveRequestDTO>().ReverseMap();
+
+            CreateMap<Admin, AdminDTO>().ReverseMap();
+
 
 
         }
