@@ -1,13 +1,13 @@
-﻿using LeaveManagement_Web.Areas.Identity.Data;
+﻿using LeaveManagement_WEB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace LeaveManagement_Web.Data;
+namespace LeaveManagement_WEB.Data;
 
-public class LeaveManagement_WebContext : IdentityDbContext<LeaveManagement_WebUser>
+public class LeaveManagement_WEBContext : IdentityDbContext<LeaveManagement_WEBUser>
 {
-    public LeaveManagement_WebContext(DbContextOptions<LeaveManagement_WebContext> options)
+    public LeaveManagement_WEBContext(DbContextOptions<LeaveManagement_WEBContext> options)
         : base(options)
     {
     }

@@ -1,4 +1,4 @@
-namespace LeaveManagement_Web.Models
+namespace LeaveManagement_WEBB.Models
 {
     public class ErrorViewModel
     {
