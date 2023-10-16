@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using LeaveManagement_Web.Data;
+using LeaveManagement_Web.Areas.Identity.Data;
+
 namespace LeaveManagement_Web
 {
     public class Program
@@ -5,9 +10,17 @@ namespace LeaveManagement_Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+                        var connectionString = builder.Configuration.GetConnectionString("LeaveManagement_WebContextConnection") ?? throw new InvalidOperationException("Connection string 'LeaveManagement_WebContextConnection' not found.");
+
+                                    builder.Services.AddDbContext<LeaveManagement_WebContext>(options =>
+                options.UseSqlServer(connectionString));
+
+                                                builder.Services.AddDefaultIdentity<LeaveManagement_WebUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<LeaveManagement_WebContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
@@ -23,12 +36,14 @@ namespace LeaveManagement_Web
             app.UseStaticFiles();
 
             app.UseRouting();
+                        app.UseAuthentication();;
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapRazorPages();
 
             app.Run();
         }
