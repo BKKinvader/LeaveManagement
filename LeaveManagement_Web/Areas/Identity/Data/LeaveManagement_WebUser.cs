@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace LeaveManagement_Web.Areas.Identity.Data;
+namespace LeaveManagement_WEB.Areas.Identity.Data;
 
-// Add profile data for application users by adding properties to the LeaveManagement_WebUser class
-public class LeaveManagement_WebUser : IdentityUser
+// Add profile data for application users by adding properties to the LeaveManagement_WEBUser class
+public class LeaveManagement_WEBUser : IdentityUser
 {
 }
 

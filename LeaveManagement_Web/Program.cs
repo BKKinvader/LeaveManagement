@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using LeaveManagement_Web.Data;
-using LeaveManagement_Web.Areas.Identity.Data;
+using LeaveManagement_WEB.Data;
+using LeaveManagement_WEB.Areas.Identity.Data;
 
-namespace LeaveManagement_Web
+namespace LeaveManagement_WEBB
 {
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-                        var connectionString = builder.Configuration.GetConnectionString("LeaveManagement_WebContextConnection") ?? throw new InvalidOperationException("Connection string 'LeaveManagement_WebContextConnection' not found.");
+                        var connectionString = builder.Configuration.GetConnectionString("LeaveManagement_WEBContextConnection") ?? throw new InvalidOperationException("Connection string 'LeaveManagement_WEBContextConnection' not found.");
 
-                                    builder.Services.AddDbContext<LeaveManagement_WebContext>(options =>
+                                    builder.Services.AddDbContext<LeaveManagement_WEBContext>(options =>
                 options.UseSqlServer(connectionString));
 
-                                                builder.Services.AddDefaultIdentity<LeaveManagement_WebUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<LeaveManagement_WebContext>();
+                                                builder.Services.AddDefaultIdentity<LeaveManagement_WEBUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<LeaveManagement_WEBContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -36,13 +36,12 @@ namespace LeaveManagement_Web
             app.UseStaticFiles();
 
             app.UseRouting();
-                        app.UseAuthentication();;
-
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
             app.MapRazorPages();
 
             app.Run();

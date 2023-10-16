@@ -30,10 +30,10 @@ body {
 }
 
 .login-logout-card a.nav-link {
-    font-size:1rem;
+    font-size: 1rem;
     color: #495057;
-    text-align:center;
-    padding:1rem;
+    text-align: center;
+    padding: 1rem;
 }
 
 .login-logout-card .card-body {

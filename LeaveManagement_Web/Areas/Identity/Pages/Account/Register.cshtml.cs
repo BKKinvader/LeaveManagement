@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using LeaveManagement_Web.Areas.Identity.Data;
+using LeaveManagement_WEB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,21 +20,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
-namespace LeaveManagement_Web.Areas.Identity.Pages.Account
+namespace LeaveManagement_WEB.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<LeaveManagement_WebUser> _signInManager;
-        private readonly UserManager<LeaveManagement_WebUser> _userManager;
-        private readonly IUserStore<LeaveManagement_WebUser> _userStore;
-        private readonly IUserEmailStore<LeaveManagement_WebUser> _emailStore;
+        private readonly SignInManager<LeaveManagement_WEBUser> _signInManager;
+        private readonly UserManager<LeaveManagement_WEBUser> _userManager;
+        private readonly IUserStore<LeaveManagement_WEBUser> _userStore;
+        private readonly IUserEmailStore<LeaveManagement_WEBUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<LeaveManagement_WebUser> userManager,
-            IUserStore<LeaveManagement_WebUser> userStore,
-            SignInManager<LeaveManagement_WebUser> signInManager,
+            UserManager<LeaveManagement_WEBUser> userManager,
+            IUserStore<LeaveManagement_WEBUser> userStore,
+            SignInManager<LeaveManagement_WEBUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -155,27 +155,27 @@ namespace LeaveManagement_Web.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private LeaveManagement_WebUser CreateUser()
+        private LeaveManagement_WEBUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<LeaveManagement_WebUser>();
+                return Activator.CreateInstance<LeaveManagement_WEBUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(LeaveManagement_WebUser)}'. " +
-                    $"Ensure that '{nameof(LeaveManagement_WebUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(LeaveManagement_WEBUser)}'. " +
+                    $"Ensure that '{nameof(LeaveManagement_WEBUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<LeaveManagement_WebUser> GetEmailStore()
+        private IUserEmailStore<LeaveManagement_WEBUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<LeaveManagement_WebUser>)_userStore;
+            return (IUserEmailStore<LeaveManagement_WEBUser>)_userStore;
         }
     }
 }
